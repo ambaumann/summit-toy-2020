@@ -1,11 +1,15 @@
 package com.example.ssouse.config;
 
+import com.example.ssouse.opa.OPAVoter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnProperty;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
 import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.access.AccessDecisionManager;
+import org.springframework.security.access.AccessDecisionVoter;
+import org.springframework.security.access.vote.UnanimousBased;
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,6 +23,9 @@ import org.springframework.security.oauth2.server.resource.authentication.JwtAut
 import org.springframework.security.web.authentication.session.NullAuthenticatedSessionStrategy;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+
+import java.util.Arrays;
+import java.util.List;
 
 @Configuration
 @EnableWebSecurity
@@ -57,6 +64,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter
       .authorizeRequests()
       .antMatchers(securityProperties.getApiMatcher())
       .authenticated()
+      .accessDecisionManager(accessDecisionManager())
 
       .and()
       .oauth2ResourceServer()
@@ -64,6 +72,13 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter
         .jwtAuthenticationConverter(grantedAuthoritiesExtractorConverter())
         .decoder(jwtDecoder());
     // @formatter:on
+  }
+
+  @Bean
+  public AccessDecisionManager accessDecisionManager() {
+    List<AccessDecisionVoter<? extends Object>> decisionVoters = Arrays
+      .asList(new OPAVoter("http://localhost:8181/v1/data/http/authz/allow"));
+    return new UnanimousBased(decisionVoters);
   }
 
   @Bean
