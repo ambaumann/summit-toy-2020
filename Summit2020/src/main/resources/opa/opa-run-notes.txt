@@ -1,0 +1,1 @@
+opa run --server --log-format=json-pretty --set=decision_logs.console=true ./standard.rego

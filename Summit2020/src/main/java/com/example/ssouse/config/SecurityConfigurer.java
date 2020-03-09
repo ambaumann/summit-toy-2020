@@ -77,6 +77,7 @@ public class SecurityConfigurer extends WebSecurityConfigurerAdapter
   @Bean
   public AccessDecisionManager accessDecisionManager() {
     List<AccessDecisionVoter<? extends Object>> decisionVoters = Arrays
+      // this path needs to match the rego package!
       .asList(new OPAVoter("http://localhost:8181/v1/data/http/authz/allow"));
     return new UnanimousBased(decisionVoters);
   }
