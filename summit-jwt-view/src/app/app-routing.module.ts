@@ -1,10 +1,12 @@
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { BrowserModule } from '@angular/platform-browser';
+import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
+
 
 import { ProtectedComponent } from './protected';
 import { AppAuthGuard } from './app.authguard';
 import { HomeComponent } from './home';
-
+import { AuthViewComponent } from './auth-component';
 
 const routes: Routes = [
   {
@@ -15,20 +17,28 @@ const routes: Routes = [
   {
     path: 'home',
     component: HomeComponent,
-    canActivate: [AppAuthGuard]
+    canActivate: [AppAuthGuard],
+    data: {
+      roles: ['USER']
+    }
   },
   {
     path: 'protected',
     component: ProtectedComponent,
     canActivate: [AppAuthGuard],
     data: {
-      roles: ['secret-agent']
+      roles: ['super-user']
     }
   }
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(routes)],
+  declarations: [
+  ],
+  imports: [
+    BrowserModule,
+    RouterModule.forRoot(routes)
+  ],
   exports: [RouterModule],
   providers: [AppAuthGuard]
 })

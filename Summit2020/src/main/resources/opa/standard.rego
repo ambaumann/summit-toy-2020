@@ -23,7 +23,6 @@ allow {
   input.method == "GET"
   input.path = ["api","v1", "inspect", "authentication"]
   is_authenticated
-
   authorities := input.auth.authorities
   authorities[_].authority == "ROLE_USER"
 }

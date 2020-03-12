@@ -30,6 +30,7 @@ export class AppAuthGuard extends KeycloakAuthGuard {
           }
         }
         if(granted === false) {
+          // todo this can cause a loop if access is not valid. Will want to renavigate to login page or something
           this.router.navigate(['/']);
         }
 
