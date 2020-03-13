@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { HomeComponent } from './home';
 import { ProtectedComponent } from './protected';
 import { AuthViewComponent } from './auth-component';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 let keycloakService: KeycloakService = new KeycloakService();
 @NgModule({
@@ -21,7 +22,8 @@ let keycloakService: KeycloakService = new KeycloakService();
   imports: [
     BrowserModule,
     KeycloakAngularModule,
-    AppRoutingModule
+    AppRoutingModule,
+    BrowserAnimationsModule
   ],
   providers: [
     {
