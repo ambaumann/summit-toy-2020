@@ -11,11 +11,10 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 export class AppComponent {
 
   value: String;
+  opened: boolean;
 
   constructor(private keycloak: KeycloakService) {
     const helper = new JwtHelperService();
-
-
 
     keycloak.getToken().then(token => {
       const decodedToken = helper.decodeToken(token);
