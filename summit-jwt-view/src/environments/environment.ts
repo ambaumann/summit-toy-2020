@@ -13,10 +13,7 @@ const keycloakConfig: KeycloakConfig = {
 
 export const environment = {
   production: false,
-  assets: {
-    dotaImages: 'https://cdn-keycloak-angular.herokuapp.com/assets/images/dota-heroes/'
-  },
-  apis: { dota: 'http://localhost:3000' },
+  apis: { voteService: 'http://localhost:3000' },
   keycloakConfig
 };
 
