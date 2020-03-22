@@ -1,3 +1,21 @@
 .app-page-container {
   height: 800px;
 }
+
+.app-vote-admin-title {
+  margin: 20px;
+}
+
+.app-vote-admin-entry-owner {
+  font-size: 20px;
+}
+
+.app-vote-admin-entry-vote {
+  font-size: 20px;
+  font-weight: bold;
+  margin-left: 15px;
+}
+
+.app-vote-admin-reset-votes-button {
+  margin-top: 20px;
+}

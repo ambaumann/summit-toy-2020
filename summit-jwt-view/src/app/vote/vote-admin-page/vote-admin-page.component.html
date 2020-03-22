@@ -1,5 +1,16 @@
 <div class="app-page-container">
-  <div fxLayoutAlign="center center" fxFlexFill>
-    <p>vote-admin-page works!</p>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+      <h2 class="app-vote-admin-title">Vote Administration</h2>
+  </div>
+  <div  fxLayout="row" fxLayoutAlign="space-around center">
+    <mat-list dense>
+      <mat-list-item *ngFor="let vote of votes">
+        <span class="app-vote-admin-entry-owner">{{vote.owner}}: </span>
+        <span class="app-vote-admin-entry-vote">{{vote.vote}} </span>
+      </mat-list-item>
+     </mat-list>
+  </div>
+  <div  fxLayout="row" fxLayoutAlign="space-around center">
+    <button mat-raised-button class="app-vote-admin-reset-votes-button">Reset Votes</button>
   </div>
 </div>

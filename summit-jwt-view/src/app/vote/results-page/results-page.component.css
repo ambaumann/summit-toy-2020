@@ -1,3 +1,33 @@
 .app-page-container {
   height: 800px;
 }
+
+.app-vote-results-title {
+  margin: 20px;
+}
+
+.app-vote-results-cats-title {
+  font-size: 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+.app-vote-results-cats-total {
+  font-size: 200px;
+  margin: 220px;
+  margin-top: 80px;
+  text-align: center;
+}
+
+.app-vote-results-dogs-title {
+  font-size: 20px;
+  margin: 20px;
+  text-align: center;
+}
+
+.app-vote-results-dogs-total {
+  font-size: 200px;
+  margin: 220px;
+  margin-top: 80px;
+  text-align: center;
+}

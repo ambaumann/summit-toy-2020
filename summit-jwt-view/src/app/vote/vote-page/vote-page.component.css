@@ -1,3 +1,28 @@
 .app-page-container {
   height: 800px;
 }
+
+.app-vote-title {
+  margin: 20px;
+}
+
+.app-cat-photo {
+  margin: 30px;
+  height: 500px;
+  width: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+.app-dog-photo {
+  margin: 30px;
+  height: 500px;
+  width: 500px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+
+button {
+  margin-bottom: 20px;
+}
+

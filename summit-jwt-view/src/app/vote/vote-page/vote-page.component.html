@@ -1,5 +1,15 @@
 <div class="app-page-container">
-  <div fxLayoutAlign="center center" fxFlexFill>
-    <p>vote-page works!</p>
+  <div fxLayout="row" fxLayoutAlign="space-around center">
+      <h2 class="app-vote-title">Select A Vote</h2>
+  </div>
+  <div  fxLayout="row wrap" fxLayoutAlign="space-around center">
+    <div fxLayout="column">
+      <img class="app-cat-photo" src="assets/img/Cat.jpg">
+      <button mat-raised-button>Vote Cat</button>
+    </div>
+    <div fxLayout="column">
+      <img class="app-dog-photo" src="assets/img/Dog.jpg">
+      <button mat-raised-button>Vote Dog</button>
+    </div>
   </div>
 </div>
