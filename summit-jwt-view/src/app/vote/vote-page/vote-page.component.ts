@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { VoteService } from '../vote.service';
+import { Vote } from '../model';
 
 @Component({
   templateUrl: './vote-page.component.html',
@@ -6,9 +8,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class VotePageComponent implements OnInit {
 
-  constructor() { }
+  vote: Vote;
+
+  constructor(public voteService: VoteService) { }
 
   ngOnInit(): void {
+    this.vote = this.voteService.getPersonalVote();
+  }
+
+  voteCat(): void {
+    this.vote = this.voteService.voteCat();
+  }
+
+  voteDog(): void {
+    this.vote = this.voteService.voteDog();
   }
 
 }

@@ -1,15 +1,26 @@
 <div class="app-page-container">
-  <div fxLayout="row" fxLayoutAlign="space-around center">
-      <h2 class="app-vote-title">Select A Vote</h2>
-  </div>
-  <div  fxLayout="row wrap" fxLayoutAlign="space-around center">
-    <div fxLayout="column">
-      <img class="app-cat-photo" src="assets/img/Cat.jpg">
-      <button mat-raised-button>Vote Cat</button>
+  <div *ngIf="!vote">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <h2 class="app-vote-title">Select A Vote</h2>
     </div>
-    <div fxLayout="column">
-      <img class="app-dog-photo" src="assets/img/Dog.jpg">
-      <button mat-raised-button>Vote Dog</button>
+    <div  fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <div fxLayout="column">
+        <img class="app-cat-photo" src="assets/img/Cat.jpg">
+        <button mat-raised-button (click)="voteCat()">Vote Cat</button>
+      </div>
+      <div fxLayout="column">
+        <img class="app-dog-photo" src="assets/img/Dog.jpg">
+        <button mat-raised-button (click)="voteDog()">Vote Dog</button>
+      </div>
+    </div>
+  </div>
+  <div *ngIf="vote">
+    <div fxLayout="row" fxLayoutAlign="space-around center">
+        <h2 class="app-vote-title">You Voted!</h2>
+    </div>
+    <div  fxLayout="row wrap" fxLayoutAlign="space-around center">
+      <img class="app-cat-photo" *ngIf="vote.vote==='cat'" src="assets/img/Cat.jpg">
+      <img class="app-dog-photo" *ngIf="vote.vote==='dog'" src="assets/img/Dog.jpg">
     </div>
   </div>
 </div>
