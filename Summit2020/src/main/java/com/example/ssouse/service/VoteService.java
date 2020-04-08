@@ -27,7 +27,7 @@ public class VoteService
     Integer dogVotes = Math.toIntExact(votes.entrySet().stream()
       .filter(vote -> Vote.DOG_OPTION.equalsIgnoreCase(vote.getValue().getVote())).count());
 
-    return ResultsSummation.builder().catCount(catVotes).dogCount(dogVotes).build();
+    return ResultsSummation.builder().catVotes(catVotes).dogVotes(dogVotes).build();
   }
 
   public Optional<Vote> getVote(String voter) {

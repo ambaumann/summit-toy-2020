@@ -14,9 +14,10 @@ export class ResultsPageComponent implements OnInit {
   constructor(public voteService: VoteService) { }
 
   ngOnInit(): void {
-    const voteResults: VoteResults = this.voteService.getVoteResults();
-    this.catCount = voteResults.catVotes;
-    this.dogCount = voteResults.dogVotes;
+    this.voteService.getVoteResults().subscribe(result => {
+      this.dogCount = result.dogVotes;
+      this.catCount = result.catVotes;
+    });
   }
 
 }

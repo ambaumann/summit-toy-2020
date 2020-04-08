@@ -11,6 +11,6 @@ import lombok.NoArgsConstructor;
 @Builder(toBuilder=true)
 public class ResultsSummation
 {
-  private Integer catCount;
-  private Integer dogCount;
+  private Integer catVotes;
+  private Integer dogVotes;
 }

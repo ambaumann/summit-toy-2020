@@ -1,7 +1,7 @@
 <div class="app-page-container">
   <div *ngIf="!vote">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-        <h2 class="app-vote-title">Select A Vote</h2>
+        <h2 class="app-vote-title">{{name}} - Select A Vote</h2>
     </div>
     <div  fxLayout="row wrap" fxLayoutAlign="space-around center">
       <div fxLayout="column">
@@ -16,7 +16,7 @@
   </div>
   <div *ngIf="vote">
     <div fxLayout="row" fxLayoutAlign="space-around center">
-        <h2 class="app-vote-title">You Voted!</h2>
+        <h2 class="app-vote-title">{{name}} - You Voted!</h2>
     </div>
     <div  fxLayout="row wrap" fxLayoutAlign="space-around center">
       <img class="app-cat-photo" *ngIf="vote.vote==='cat'" src="assets/img/Cat.jpg">

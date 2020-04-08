@@ -13,7 +13,7 @@ const keycloakConfig: KeycloakConfig = {
 
 export const environment = {
   production: false,
-  apis: { voteService: 'http://localhost:3000' },
+  apis: { voteService: 'http://localhost:8081/api/v1' },
   keycloakConfig
 };
 

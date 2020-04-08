@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { KeycloakService } from 'keycloak-angular';
 import { Vote, VoteResults } from './model';
+import { Observable } from 'rxjs';
+import { VoteApi } from './vote-api';
 
 
 @Injectable({
@@ -8,54 +11,45 @@ import { Vote, VoteResults } from './model';
 })
 export class VoteService {
 
-  // environment
-
-  private votes: Array<Vote> = new Array(
-    new Vote('Bill', 'cat'),
-    new Vote('Sarah', 'dog'));
-
-  private personalVote: Vote;
   private username: string;
 
-  constructor(protected keycloakAngular: KeycloakService) {
+  constructor(protected keycloakAngular: KeycloakService, private voteAPI: VoteApi) {
     this.username = keycloakAngular.getUsername();
   }
 
+  public getUsername(): Observable<string> {
+    return this.voteAPI.getUsername();
+  }
+
   // no roles
-  public getVoteResults(): VoteResults {
-    return new VoteResults(this.votes.filter(vote => vote.vote === 'cat').length
-    , this.votes.filter(vote => vote.vote === 'dog').length);
+  public getVoteResults(): Observable<VoteResults> {
+    return this.voteAPI.getResultsSummation();
   }
 
   // user role
-  public getPersonalVote(): Vote {
-    return this.personalVote;
+  public getPersonalVote(): Observable<Vote> {
+    return this.voteAPI.getUserVote(this.username);
   }
 
-  public voteCat(): Vote {
+  public voteCat(): Observable<Vote> {
     return this.vote('cat');
   }
 
-  public voteDog(): Vote {
+  public voteDog(): Observable<Vote> {
     return this.vote('dog');
   }
 
-  private vote(pick: string): Vote {
+  private vote(pick: string): Observable<Vote> {
     const vote: Vote = new Vote(this.username, pick);
-    this.votes.push(vote);
-    this.personalVote = vote;
-    return vote;
+    return this.voteAPI.postVote(vote);
   }
 
   // admin
-  public getListOfVotes(): Array<Vote> {
-    return this.votes;
+  public getListOfVotes(): Observable<Array<Vote>> {
+    return this.voteAPI.getListOfAllVotes();
   }
 
-  public resetVote(): void {
-    this.votes.length = 0;
-    this.personalVote = null;
+  public resetVote(): Observable<boolean> {
+    return this.voteAPI.resetVotes();
   }
-
-
 }

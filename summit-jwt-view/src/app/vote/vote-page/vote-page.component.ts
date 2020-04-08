@@ -10,18 +10,30 @@ export class VotePageComponent implements OnInit {
 
   vote: Vote;
 
-  constructor(public voteService: VoteService) { }
+  name: string;
+
+  constructor(public voteService: VoteService) {
+    voteService.getUsername().subscribe(name => {
+      this.name = name.toUpperCase();
+    });
+  }
 
   ngOnInit(): void {
-    this.vote = this.voteService.getPersonalVote();
+    this.voteService.getPersonalVote().subscribe(vote => {
+      this.vote = vote;
+    });
   }
 
   voteCat(): void {
-    this.vote = this.voteService.voteCat();
+    this.voteService.voteCat().subscribe(vote => {
+      this.vote = vote;
+    });
   }
 
   voteDog(): void {
-    this.vote = this.voteService.voteDog();
+    this.voteService.voteDog().subscribe(vote => {
+      this.vote = vote;
+    });
   }
 
 }

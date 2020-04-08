@@ -13,16 +13,25 @@ export class VoteAdminPageComponent implements OnInit {
   constructor(public voteService: VoteService) { }
 
   ngOnInit(): void {
-    this.votes = this.voteService.getListOfVotes();
+    this.voteService.getListOfVotes().subscribe(votes => {
+      this.votes = votes;
+    });
   }
 
   resetVotes(): void {
-    this.voteService.resetVote();
-    this.setVotes();
+    this.voteService.resetVote().subscribe(resetResult => {
+      console.log('Reset: ' + resetResult);
+      if (resetResult) {
+        this.votes.length = 0;
+        this.setVotes();
+      }
+    });
+
   }
 
   setVotes(): void {
-    this.votes = this.voteService.getListOfVotes();
+    this.voteService.getListOfVotes().subscribe(votes => {
+      this.votes = votes;
+    });
   }
-
 }

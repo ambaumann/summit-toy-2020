@@ -4,6 +4,9 @@ import com.example.ssouse.config.SecurityContextUtils;
 import com.example.ssouse.domain.ResultsSummation;
 import com.example.ssouse.domain.Vote;
 import com.example.ssouse.service.VoteService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ObjectNode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -15,7 +18,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.annotation.security.RolesAllowed;
 import java.util.List;
 import java.util.Optional;
 import java.util.Set;
@@ -27,10 +29,15 @@ public class APIController
   @Autowired
   VoteService voteService;
 
+  ObjectMapper mapper = new ObjectMapper();
+
   @GetMapping(path = "inspect/username")
   //@RolesAllowed({"ROLE_USER"})
-  public ResponseEntity<String> getAuthorizedUserName() {
-    return ResponseEntity.ok(SecurityContextUtils.getUserName());
+  public ResponseEntity<String> getAuthorizedUserName() throws JsonProcessingException
+  {
+    ObjectNode rootNode = mapper.createObjectNode();
+    rootNode.put("username", SecurityContextUtils.getUserName());
+    return ResponseEntity.ok(mapper.writerWithDefaultPrettyPrinter().writeValueAsString(rootNode));
   }
 
   @GetMapping(path = "inspect/roles")
@@ -67,6 +74,7 @@ public class APIController
     if(voteService.getVote(vote.getOwner()).isPresent()) {
       return ResponseEntity.badRequest().build();
     }
+    voteService.vote(vote);
     return ResponseEntity.noContent().build();
   }
 

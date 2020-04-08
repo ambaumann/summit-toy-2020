@@ -19,6 +19,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ResultsPageComponent } from './vote/results-page/results-page.component';
 import { VoteAdminPageComponent } from './vote/vote-admin-page/vote-admin-page.component';
 import { VotePageComponent } from './vote/vote-page/vote-page.component';
+import { VoteApi } from './vote/vote-api';
 
 let keycloakService: KeycloakService = new KeycloakService();
 @NgModule({
@@ -52,7 +53,8 @@ let keycloakService: KeycloakService = new KeycloakService();
     {
       provide: KeycloakService,
       useValue: keycloakService
-    }
+    },
+    VoteApi
   ],
   bootstrap: [AppComponent]
 })
