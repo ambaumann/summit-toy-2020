@@ -1,9 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { environment } from '../../environments';
-import { Observable, empty, EMPTY } from 'rxjs';
+import { Observable, EMPTY } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
-import { KeycloakService } from 'keycloak-angular';
 import { Vote, VoteResults } from './model';
 
 @Injectable()
@@ -14,17 +13,18 @@ export class VoteApi {
   httpOptions = {
     headers: new HttpHeaders({
       // 'Content-Type':  'application/json',
-      Authorization: 'my-auth-token'
+      //Authorization: 'my-auth-token'
+      // 'Access-Control-Allow-Origin': '*'
     })
   };
 
-  constructor(private http: HttpClient, private keycloakAngular: KeycloakService) {
+  constructor(private http: HttpClient) {
     // import environment
     this.baseUrl = environment.apis.voteService;
     // TODO when do we set a new token? Per call?
-    keycloakAngular.getToken().then(tokenValue => {
-      this.httpOptions.headers.set('Authorization', tokenValue);
-    });
+    //keycloakAngular.getToken().then(tokenValue => {
+      //this.httpOptions.headers.set('Authorization', tokenValue);
+    //});
   }
 
   getUsername(): Observable<string> {

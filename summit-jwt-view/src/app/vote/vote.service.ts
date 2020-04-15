@@ -1,6 +1,4 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { KeycloakService } from 'keycloak-angular';
 import { Vote, VoteResults } from './model';
 import { Observable } from 'rxjs';
 import { VoteApi } from './vote-api';
@@ -13,8 +11,8 @@ export class VoteService {
 
   private username: string;
 
-  constructor(protected keycloakAngular: KeycloakService, private voteAPI: VoteApi) {
-    this.username = keycloakAngular.getUsername();
+  constructor(private voteAPI: VoteApi) {
+    this.username = 'TODO';
   }
 
   public getUsername(): Observable<string> {

@@ -9,9 +9,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatListModule } from '@angular/material/list';
 
-import { KeycloakService, KeycloakAngularModule } from 'keycloak-angular';
-import { initializer } from './utils/app-init';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { AuthViewComponent } from './auth-component';
@@ -21,7 +18,6 @@ import { VoteAdminPageComponent } from './vote/vote-admin-page/vote-admin-page.c
 import { VotePageComponent } from './vote/vote-page/vote-page.component';
 import { VoteApi } from './vote/vote-api';
 
-let keycloakService: KeycloakService = new KeycloakService();
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,7 +28,6 @@ let keycloakService: KeycloakService = new KeycloakService();
   ],
   imports: [
     BrowserModule,
-    KeycloakAngularModule,
     FlexLayoutModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -44,16 +39,6 @@ let keycloakService: KeycloakService = new KeycloakService();
     HttpClientModule
   ],
   providers: [
-    {
-      provide: APP_INITIALIZER,
-      useFactory: initializer,
-      multi: true,
-      deps: [KeycloakService]
-    },
-    {
-      provide: KeycloakService,
-      useValue: keycloakService
-    },
     VoteApi
   ],
   bootstrap: [AppComponent]

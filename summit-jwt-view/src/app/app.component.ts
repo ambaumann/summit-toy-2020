@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import { KeycloakService } from 'keycloak-angular';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
 
@@ -13,15 +12,15 @@ export class AppComponent {
   value: String;
   opened: boolean;
 
-  constructor(private keycloak: KeycloakService) {
+  constructor() {
     const helper = new JwtHelperService();
 
-    keycloak.getToken().then(token => {
-      const decodedToken = helper.decodeToken(token);
-      this.value = decodedToken;
+    // keycloak.getToken().then(token => {
+    //   const decodedToken = helper.decodeToken(token);
+    //   this.value = decodedToken;
 
-      //this.value = atob(token.split('.')[1]);
-    });
+    //   //this.value = atob(token.split('.')[1]);
+    // });
 
   }
 }

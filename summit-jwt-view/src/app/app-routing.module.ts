@@ -2,11 +2,9 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 
-import { AppAuthGuard } from './app.authguard';
 import { ResultsPageComponent } from './vote/results-page/results-page.component';
 import { VotePageComponent } from './vote/vote-page/vote-page.component';
 import { VoteAdminPageComponent } from './vote/vote-admin-page/vote-admin-page.component';
-import { AuthViewComponent } from './auth-component';
 
 const routes: Routes = [
   {
@@ -16,13 +14,11 @@ const routes: Routes = [
   },
   {
     path: 'results',
-    component: ResultsPageComponent,
-    canActivate: [AppAuthGuard]
+    component: ResultsPageComponent
   },
   {
     path: 'vote',
     component: VotePageComponent,
-    canActivate: [AppAuthGuard],
     data: {
       roles: ['USER']
     }
@@ -30,7 +26,6 @@ const routes: Routes = [
   {
     path: 'admin',
     component: VoteAdminPageComponent,
-    canActivate: [AppAuthGuard],
     data: {
       roles: ['super-user']
     }
@@ -44,7 +39,6 @@ const routes: Routes = [
     BrowserModule,
     RouterModule.forRoot(routes)
   ],
-  exports: [RouterModule],
-  providers: [AppAuthGuard]
+  exports: [RouterModule]
 })
 export class AppRoutingModule { }

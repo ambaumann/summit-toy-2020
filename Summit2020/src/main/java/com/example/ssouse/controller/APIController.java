@@ -83,5 +83,4 @@ public class APIController
     voteService.resetVotes();
     return ResponseEntity.noContent().build();
   }
-
 }
