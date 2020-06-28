@@ -1,0 +1,7 @@
+kind: ImageStream
+apiVersion: image.openshift.io/v1
+metadata:
+  name: vote-service-image-stream-s2i
+spec:
+  lookupPolicy:
+    local: true

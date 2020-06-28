@@ -1,0 +1,15 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: opa-dev
+  labels:
+    app: opa
+spec:
+  host: opa-dev-summit2020.apps-crc.testing
+  to:
+    kind: Service
+    name: opa
+    weight: 100
+  port:
+    targetPort: http
+  wildcardPolicy: None

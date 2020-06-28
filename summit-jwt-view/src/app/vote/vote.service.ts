@@ -50,4 +50,8 @@ export class VoteService {
   public resetVote(): Observable<boolean> {
     return this.voteAPI.resetVotes();
   }
+
+  public logout(): Observable<boolean> {
+    return this.voteAPI.logout();
+  }
 }

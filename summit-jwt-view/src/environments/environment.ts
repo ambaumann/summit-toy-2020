@@ -7,7 +7,7 @@
 
 export const environment = {
   production: false,
-  apis: { voteService: 'http://localhost:3000/api/v1' }
+  apis: { voteService: 'https://keycloak-gatekeeper-summit2020.apps-crc.testing/api/v1' }
 };
 
 /*

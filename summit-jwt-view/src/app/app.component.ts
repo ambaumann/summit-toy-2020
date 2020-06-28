@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
+import { Router, ActivatedRoute, ParamMap } from '@angular/router';
 
 import { JwtHelperService } from '@auth0/angular-jwt';
+import { VoteService } from './vote/vote.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +14,7 @@ export class AppComponent {
   value: String;
   opened: boolean;
 
-  constructor() {
+  constructor(public voteService: VoteService, public router: Router) {
     const helper = new JwtHelperService();
 
     // keycloak.getToken().then(token => {
@@ -22,5 +24,12 @@ export class AppComponent {
     //   //this.value = atob(token.split('.')[1]);
     // });
 
+  }
+
+  logOut() {
+    this.voteService.logout().subscribe(bool => {
+      console.log("logged out");
+      this.router.navigate(['/results']);
+    });
   }
 }

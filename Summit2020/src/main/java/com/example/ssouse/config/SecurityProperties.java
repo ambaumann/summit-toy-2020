@@ -19,6 +19,7 @@ public class SecurityProperties {
   private String apiMatcher;
   private Cors cors;
   private String issuerUri;
+  private String opaUrl;
 
   public CorsConfiguration getCorsConfiguration() {
     CorsConfiguration corsConfiguration = new CorsConfiguration();

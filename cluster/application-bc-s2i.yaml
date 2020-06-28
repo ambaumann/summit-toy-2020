@@ -1,0 +1,38 @@
+kind: BuildConfig
+apiVersion: build.openshift.io/v1
+metadata:
+  name: vote-s2i-dev
+  labels:
+    app: summit-toy
+    build: vehicle-service-dev-s2i
+    name: vehicle-service-dev-s2i
+    template: s2i-app-build-template
+    type: image
+spec:
+  nodeSelector: null
+  output:
+    to:
+      kind: ImageStreamTag
+      name: 'vote-service-image-stream-s2i:latest'
+  resources:
+    limits:
+      cpu: '1'
+      memory: 768Mi
+    requests:
+      cpu: 500m
+      memory: 256Mi
+  successfulBuildsHistoryLimit: 5
+  failedBuildsHistoryLimit: 5
+  strategy:
+    type: Source
+    sourceStrategy:
+      from:
+        kind: ImageStreamTag
+        namespace: openshift
+        name: 'openjdk-11-rhel7:latest'
+  postCommit: {}
+  source:
+    type: Binary
+    binary: {}
+  triggers: []
+  runPolicy: Serial
