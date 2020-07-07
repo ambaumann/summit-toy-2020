@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Vote, VoteResults } from './model';
 import { Observable } from 'rxjs';
+import { flatMap } from 'rxjs/operators';
 import { VoteApi } from './vote-api';
 
 
@@ -12,7 +13,6 @@ export class VoteService {
   private username: string;
 
   constructor(private voteAPI: VoteApi) {
-    this.username = 'TODO';
   }
 
   public getUsername(): Observable<string> {
@@ -26,7 +26,11 @@ export class VoteService {
 
   // user role
   public getPersonalVote(): Observable<Vote> {
-    return this.voteAPI.getUserVote(this.username);
+    this.username = 'TODO';
+    return this.getUsername().pipe(flatMap(user => {
+      this.username = user;
+      return this.voteAPI.getUserVote(this.username)
+    }));
   }
 
   public voteCat(): Observable<Vote> {
@@ -38,6 +42,7 @@ export class VoteService {
   }
 
   private vote(pick: string): Observable<Vote> {
+    // could probably handle this a bit better.
     const vote: Vote = new Vote(this.username, pick);
     return this.voteAPI.postVote(vote);
   }

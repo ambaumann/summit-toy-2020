@@ -30,7 +30,7 @@ public class SecurityContextUtils {
 
     if (null != authentication) {
       if(authentication instanceof JwtAuthenticationToken) {
-        username = ((JwtAuthenticationToken) authentication).getTokenAttributes().get("user_name").toString();
+        username = ((JwtAuthenticationToken) authentication).getTokenAttributes().get("preferred_username").toString();
       } else {
         LOGGER.debug("User details not found in Security Context");
       }

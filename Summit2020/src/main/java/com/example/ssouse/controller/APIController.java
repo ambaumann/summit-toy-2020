@@ -32,7 +32,6 @@ public class APIController
   ObjectMapper mapper = new ObjectMapper();
 
   @GetMapping(path = "inspect/username")
-  //@RolesAllowed({"ROLE_USER"})
   public ResponseEntity<String> getAuthorizedUserName() throws JsonProcessingException
   {
     ObjectNode rootNode = mapper.createObjectNode();
@@ -41,13 +40,11 @@ public class APIController
   }
 
   @GetMapping(path = "inspect/roles")
-  //@RolesAllowed({"ROLE_USER"})
   public ResponseEntity<Set<String>> getAuthorizedUserRoles() {
     return ResponseEntity.ok(SecurityContextUtils.getUserRoles());
   }
 
   @GetMapping(path = "inspect/authentication")
-  //@RolesAllowed({"ROLE_USER"})
   public ResponseEntity<JwtAuthenticationToken> getAuthorizedUserAuthentication() {
     JwtAuthenticationToken token = (JwtAuthenticationToken)SecurityContextHolder.getContext().getAuthentication();
     return ResponseEntity.ok(token);
